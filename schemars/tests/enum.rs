@@ -118,3 +118,23 @@ enum SimpleInternal {
 fn enum_simple_internal_tag() -> TestResult {
     test_default_generated_schema::<SimpleInternal>("enum-simple-internal")
 }
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+enum Simple {
+    A(i32),
+    B(bool),
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+struct FlatEnum {
+    i: i64,
+    #[schemars(flatten)]
+    e: Simple,
+}
+
+#[test]
+fn enum_flattened() -> TestResult {
+    test_default_generated_schema::<FlatEnum>("flattened-enum")
+}
